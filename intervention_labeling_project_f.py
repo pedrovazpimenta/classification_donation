@@ -19,9 +19,10 @@ from nltk.corpus import stopwords
 #-------------------------------------------------------------------------------
 nltk.download('stopwords') 
 #-------------------------------------------------------------------------------
-#relevant urls
-url_1 = 'donations.csv'     #donations.csv file
-url_2 = 'glove.6B.300d.txt' #word vector .txt file
+# relevant urls, the first two are too big for the repository, so you'll need
+# to download them to run the script
+url_1 = 'donations.csv'     #https://milliondollarlist.org/
+url_2 = 'glove.6B.300d.txt' #https://nlp.stanford.edu/projects/glove/
 url_3 = 'tags.csv'          #tags .csv file
 url_4 = 'outputtable.csv'   #output .csv file
 #-------------------------------------------------------------------------------
