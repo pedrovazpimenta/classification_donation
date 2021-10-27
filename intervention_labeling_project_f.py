@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #-------------------------------------------------------------------------------
@@ -21,10 +20,10 @@ from nltk.corpus import stopwords
 nltk.download('stopwords') 
 #-------------------------------------------------------------------------------
 #relevant urls
-url_1 = 'c:/users/pedro/downloads/donations.csv'    #donations.csv file
-url_2 = 'f:/python/word2vec/glove.6B.300d.txt'      #word vector .txt file
-url_3 = 'c:/users/pedro/downloads/tags.csv'         #tags .csv file
-url_4 = 'c:/users/pedro/downloads/outputtable.csv'  #output .csv file
+url_1 = 'donations.csv'     #donations.csv file
+url_2 = 'glove.6B.300d.txt' #word vector .txt file
+url_3 = 'tags.csv'          #tags .csv file
+url_4 = 'outputtable.csv'   #output .csv file
 #-------------------------------------------------------------------------------
 #functions
 
@@ -40,8 +39,7 @@ def replace_disaster(s):
     if s == 'yes':
         return 'disaster'
     else:
-        return s
-    
+        return s    
 
 def str_to_set_of_words(s):
     
@@ -98,7 +96,7 @@ def cos_angle(vec_1 , vec_2):
     ve_2 = vec_2/np.linalg.norm(vec_2)
     return np.dot(ve_1 ,ve_2) 
 
-def set_distance(set_1 , set_2):
+def set_distance(set_1 , set_2 , word_distances):
     ''' set , set -> float
         given two sets, calculate the "distance" between every combination of
         words possible, square them keeping the signal and return the mean of
@@ -118,7 +116,7 @@ def set_distance(set_1 , set_2):
     else:
         return dist/n 
     
-def dist_ranks(set_0):
+def dist_ranks(set_0 , tags , tags_dict , word_distances):
     ''' set , pd.DataFrame, dict -> list
         get a set of words, a data frame containing tags and the dictionary that
         convert tags into a set of words, returning the 5 best matches. One 
@@ -128,7 +126,7 @@ def dist_ranks(set_0):
     distances_tags = {}
     distances = []
     for tag in tags['tags']:
-        d = set_distance(set_0 , tags_dict[tag])
+        d = set_distance(set_0 , tags_dict[tag] , word_distances)
         distances_tags[tag] = d
         distances += [d]
     distances.sort(reverse = True)
@@ -308,7 +306,7 @@ def main():
     print('Ranking.')  
                     
     joined_df['ranks'] = joined_df['Sets of words'].apply(lambda x :
-        dist_ranks(x , tags , tags_dict))
+        dist_ranks(x , tags , tags_dict, word_distances))
     
     print('Ranking done, generating output.')  
     
