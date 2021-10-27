@@ -3,10 +3,10 @@
 #-------------------------------------------------------------------------------
 __author__ = "Pedro Vaz Pimenta"
 #-------------------------------------------------------------------------------
-# in this script we take a large data frame file and label the rows according
+# in this script, we take a large data frame file and label the rows according
 # to a model of semantic proximation of words, choosing tags from another table;
-# for it to run, it will also need a word vector file and the output is the same
-# data frame joined with rank columns containing the tags
+# for it to run, it will also need a word vector file. The output is the same
+# data frame from the start joined with rank columns containing the tags
 # 
 # for more details and resources, check the notebook file
 #-------------------------------------------------------------------------------
@@ -19,8 +19,8 @@ from nltk.corpus import stopwords
 #-------------------------------------------------------------------------------
 nltk.download('stopwords') 
 #-------------------------------------------------------------------------------
-# relevant urls, the first two are too big for the repository, so you'll need
-# to download them to run the script
+# relevant urls; the first two are too big for the repository, so you'll need
+# to download them to run the script, only the tags.csv file is provided
 url_1 = 'donations.csv'     #https://milliondollarlist.org/
 url_2 = 'glove.6B.300d.txt' #https://nlp.stanford.edu/projects/glove/
 url_3 = 'tags.csv'          #tags .csv file
@@ -43,7 +43,7 @@ def replace_disaster(s):
         return s    
 
 def str_to_set_of_words(s):
-    
+    # str -> set
     s = s.lower()                               #we need lower case only
     s = re.sub(r'[0-9]', ' ', s)                #replace any number by ' '
     s = re.sub(r'\W', ' ', s)                   #replace useless symbols by ' '
@@ -120,7 +120,7 @@ def set_distance(set_1 , set_2 , word_distances):
 def dist_ranks(set_0 , tags , tags_dict , word_distances):
     ''' set , pd.DataFrame, dict -> list
         get a set of words, a data frame containing tags and the dictionary that
-        convert tags into a set of words, returning the 5 best matches. One 
+        converts tags into a set of words, returning the best 5 matches. One 
         could change the parameter size for a bigger or smaller rank    
     '''
     size = 5
