@@ -288,7 +288,6 @@ def main():
         word_tags = word_tags.union(word_set)
     word_distances = {}
     
-    # bad (but perfectly functional) code, will fix later
     for word_1 in words:
         for word_2 in word_tags:
             try:
