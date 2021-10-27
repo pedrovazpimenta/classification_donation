@@ -26,7 +26,7 @@ url_2 = 'glove.6B.300d.txt' #https://nlp.stanford.edu/projects/glove/
 url_3 = 'tags.csv'          #tags .csv file
 url_4 = 'outputtable.csv'   #output .csv file
 #-------------------------------------------------------------------------------
-#functions
+# functions
 
 def replace_nan(s):
     # NaN or str -> str, '' if NaN
@@ -92,7 +92,7 @@ def correction_tags(set_of_words):
     return set_of_words
 
 def cos_angle(vec_1 , vec_2):
-    #np.array(float) , np.array(float) -> float , cos(angle between vectors)
+    # np.array(float) , np.array(float) -> float , cos(angle between vectors)
     ve_1 = vec_1/np.linalg.norm(vec_1)
     ve_2 = vec_2/np.linalg.norm(vec_2)
     return np.dot(ve_1 ,ve_2) 
@@ -144,7 +144,7 @@ def dist_ranks(set_0 , tags , tags_dict , word_distances):
     return ret
 
 def chooose_index(l, i , j):
-    #list , int , int -> list element
+    # list , int , int -> list element
     return l[i][j]
 
 def to_int(s):
@@ -288,7 +288,7 @@ def main():
         word_tags = word_tags.union(word_set)
     word_distances = {}
     
-    #bad (but perfectly functional) code, will fix later
+    # bad (but perfectly functional) code, will fix later
     for word_1 in words:
         for word_2 in word_tags:
             try:
